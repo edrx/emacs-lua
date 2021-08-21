@@ -1,0 +1,45 @@
+# This file:
+#   https://github.com/edrx/emacs-lua/
+#       http://angg.twu.net/emacs-lua/README.org.html
+#       http://angg.twu.net/emacs-lua/README.org
+#               (find-angg "emacs-lua/README.org")
+#               (find-angg "emacs-lua/")
+# Author: Eduardo Ochs <eduardoochs@gmail.com>
+# 
+# Some eev-isms:
+# (defun c  () (interactive) (eek "C-c C-e h h"))
+# (defun o  () (interactive) (find-angg "emacs-lua/README.org"))
+# (defun v  () (interactive) (brg     "~/emacs-lua/README.html"))
+# (defun cv () (interactive) (c) (v))
+# 
+# (find-orgnode "Table of Contents")
+#+OPTIONS: toc:nil num:nil
+
+Emacs Lua
+
+#+begin_comment
+ (eepitch-shell)
+ (eepitch-kill)
+ (eepitch-shell)
+cd ~/emacs-lua/
+laf
+rm -v *~
+rm -v *.html
+rm -v *.so
+
+# (find-fline   "~/emacs-lua/")
+# (magit-status "~/emacs-lua/")
+# (find-gitk    "~/emacs-lua/")
+#
+#   (s)tage all changes
+#   (c)ommit -> (c)reate
+#   (P)ush -> (p)ushremote
+#   https://github.com/edrx/emacs-lua
+#
+#+end_comment
+
+# Local Variables:
+# coding:               utf-8-unix
+# modes:                (org-mode fundamental-mode)
+# org-html-postamble:   nil
+# End:
