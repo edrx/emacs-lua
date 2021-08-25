@@ -16,6 +16,7 @@
 
 ;; «.emlua-format»		(to "emlua-format")
 ;; «.emlua-quote»		(to "emlua-quote")
+;; «.load-everything»		(to "load-everything")
 ;; «.eepitch-emlua»		(to "eepitch-emlua")
 ;; «.eepitch-emlua-repl»	(to "eepitch-emlua-repl")
 
@@ -87,6 +88,42 @@
 
 
 
+
+;;;  _                 _ 
+;;; | | ___   __ _  __| |
+;;; | |/ _ \ / _` |/ _` |
+;;; | | (_) | (_| | (_| |
+;;; |_|\___/ \__,_|\__,_|
+;;;                      
+;; «load-everything»  (to ".load-everything")
+
+(setq emlua-dot-so       "~/emacs-lua/emlua.so")
+(setq emlua-dot-el       "~/emacs-lua/emlua.el")
+(setq emlua-luainit-file "~/LUA/lua50init.lua")
+(setq emlua-edrxrepl-dir "~/edrxrepl/")
+
+;; Test: (find-estring (emlua-init-lua-0))
+;;
+(defun emlua-init-lua-0 ()
+  (format "
+     dofile '%s'
+     package.path = '%s?.lua;'..package.path
+     require 'edrxrepl'
+     REPL = EdrxRepl.new()
+     return EdrxRepl, PP
+     "
+     (ee-expand emlua-luainit-file)
+     (ee-expand emlua-edrxrepl-dir)))
+
+;; Test: (emlua-load-all)
+;;
+(defun emlua-load-all ()
+  (list (load emlua-dot-so)
+	(emlua-dostring (emlua-init-lua-0))))
+
+
+
+
 ;;;                  _ _       _                          _             
 ;;;   ___  ___ _ __ (_) |_ ___| |__         ___ _ __ ___ | |_   _  __ _ 
 ;;;  / _ \/ _ \ '_ \| | __/ __| '_ \ _____ / _ \ '_ ` _ \| | | | |/ _` |
@@ -98,25 +135,13 @@
 ;; See: (find-eev "eepitch.el" "eepitch-vterm")
 ;;      (find-eev "eepitch.el" "eepitch-this-line")
 ;;
-(defun eepitch-emlua ()
-  "(This function is a prototype that only works in a controlled setting!)"
-  (interactive)
-  (eepitch '(find-ebuffer "*emlua*"))
-  (setq eepitch-line 'eepitch-line-emlua))
+(defface emlua-prompt-face
+  '((t (:foreground "RoyalBlue3")))
+  "")
 
-(defun eepitch-line-emlua (line)
-  "Send LINE to the emlua buffer (whatever that means)."
-  (eepitch-eval-at-target-window
-   '(progn (goto-char (point-max))
-	   (insert (emlua-process line)))))
-
-(defun emlua-process (inputline)
-  "This is a stub - replace it by something less trivial."
-  (format "%S\n" (emlua-dostring inputline)))
-
-;; (load "~/emacs-lua/emlua.so")
-;; (emlua-dostring "return 22")
-
+(defface emlua-user-input-face
+  '((t (:foreground "orange1")))
+  "")
 
 
 
@@ -130,52 +155,51 @@
 ;;
 ;; «eepitch-emlua-repl»  (to ".eepitch-emlua-repl")
 
-(defun eepitch-emluarepl ()
-  "(This function is a prototype that only works in a controlled setting!)"
+(defun eepitch-emlua ()
+  "Setup eepitch-ing to an emlua buffer.
+This function is a prototype that only works in a controlled setting."
   (interactive)
   (eepitch '(find-ebuffer "*emlua*"))
-  (setq eepitch-line 'eepitch-line-emluarepl))
+  (setq eepitch-line 'eepitch-emlua-esend))
 
-(defun eepitch-emluarepl-insert (str)
+;; See: (find-angg "edrxrepl/edrxrepl.lua" "EdrxRepl-emacs")
+;;      (find-angg "edrxrepl/edrxrepl.lua" "EdrxRepl-emacs" "erepltest =")
+;;      (find-angg "edrxrepl/edrxrepl.lua" "EdrxRepl-emacs" "esend =")
+;;
+(defun eepitch-emlua-insert (str &optional face)
   "Insert STR at the end of the emlua buffer."
+  (if face (setq str (propertize str 'face face)))
   (eepitch-eval-at-target-window
    '(progn (goto-char (point-max))
 	   (insert str))))
 
-(defun eepitch-emluarepl-prompt ()
-  (eepitch-emluarepl-insert "> "))
+(defun eepitch-emlua-prompt ()
+  "Insert the result of REPL:eprompt() at the end of the *emlua* buffer."
+  (eepitch-emlua-insert
+   (aref (emlua-dostring "return REPL:eprompt()") 0)
+   'emlua-prompt-face))
 
-(defun eepitch-line-emluarepl (line)
-  (eepitch-emluarepl-insert line)
-  (eepitch-emluarepl-insert "\nOUTPUT\n")
-  (eepitch-emluarepl-prompt))
+(defvar eepitch-emlua-esend0 nil
+  "The results of the last call to `eepitch-emlua-esend0'.")
 
+(defun eepitch-emlua-esend0 (line)
+  "Run REPL:esend(LINE) and save the results in `eepitch-emlua-esend0'."
+  (setq eepitch-emlua-esend0
+	(emlua-dostring
+	 (format "return REPL:esend(%s)"
+		 (emlua-quote line)))))
 
+(defun eepitch-emlua-esend1 ()
+  "Insert the results in `eepitch-emlua-esend0' in the right way."
+  (let* ((rets eepitch-emlua-esend0)
+	 (len  (length rets))
+         (ret0 (aref rets 0))
+	 (ret1 (and (< 1 (length rets)) (aref rets 1))))
+    (if ret1 (eepitch-emlua-insert ret1))))
 
-(defun eepitch-emluarepl-prompt ()
-  (eepitch-emluarepl-insert
-   (aref (emlua-dostring "return REPL:eprompt()") 0)))
-
-(defun eepitch-emluarepl-esend0 (line)
-  (setq eepitch-emluarepl-rets
-   (emlua-dostring
-    (format "return REPL:esend(%s)"
-     (emlua-quote line)))))
-
-(defun eepitch-emluarepl-esend1 ()
-  (let* ((rets eepitch-emluarepl-rets)
-         (ret0 (aref rets 0)))
-    (if (equal ret0 "(success: =)")
-        (eepitch-emluarepl-insert (format "%s\n" (aref rets 1))))
-    (if (equal ret0 "(comp error)")
-        (eepitch-emluarepl-insert (format "%s\n" (aref rets 1))))
-    (if (equal ret0 "(exec error)")
-        (eepitch-emluarepl-insert (format "%s\n" (aref rets 1))))
-    ))
-  
-(defun eepitch-line-emluarepl (line)
-  (eepitch-emluarepl-insert (format "%s\n" line))
-  (eepitch-emluarepl-esend0 line)
-  (eepitch-emluarepl-esend1)
-  (eepitch-emluarepl-prompt))
+(defun eepitch-emlua-esend (line)
+  (eepitch-emlua-insert (format "%s\n" line) 'emlua-user-input-face)
+  (eepitch-emlua-esend0 line)
+  (eepitch-emlua-esend1)
+  (eepitch-emlua-prompt))
 

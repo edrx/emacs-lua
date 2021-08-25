@@ -105,13 +105,6 @@ int emacs_module_init(struct emacs_runtime *ert) noexcept
 
 
 /*
-# (find-es "emacs" "vterm-recompile")
-# (find-sh "locate emacs-module.h")
-# (find-sh "locate lua.hpp")
-# (find-sh "locate liblua5.3")
-# (find-fline "~/bigsrc/emacs27/src/" "emacs-module.h")
-# (find-fline "/usr/include/lua5.3/" "lua.hpp")
-# (find-fline "/usr/lib/x86_64-linux-gnu/" "liblua5.3.so")
 
  (eepitch-shell)
  (eepitch-kill)
@@ -180,7 +173,7 @@ FOO!!!
 = REPL
 = {2,3}
 = Repl
-= mytabletostring(Repl)
+= mytabletostring(REPL)
 
 REPL2 = Repl:new()
 = REPL2
