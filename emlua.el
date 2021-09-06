@@ -19,6 +19,7 @@
 ;; «.load-everything»		(to "load-everything")
 ;; «.eepitch-emlua»		(to "eepitch-emlua")
 ;; «.eepitch-emlua-repl»	(to "eepitch-emlua-repl")
+;; «.emlua-eval-this»		(to "emlua-eval-this")
 
 
 
@@ -45,21 +46,21 @@
 ;;                 --> "[=[foo]=]"
 ;;
 (defun emlua-quote (o)
-  (if (stringp o) (lua-bracket-quote o) (format "%S" o)))
+  (if (stringp o) (emlua-bracket-quote o) (format "%S" o)))
 
-;; Example: (lua-bracket-quote ".[=[ FOO ]===].")
+;; Example: (emlua-bracket-quote ".[=[ FOO ]===].")
 ;;                     --> "[==[.[=[ FOO ]===].]==]"
 ;;
-(defun lua-bracket-quote (string)
-  (let ((core (lua-bracket-new-core (lua-bracket-hash-table string))))
+(defun emlua-bracket-quote (string)
+  (let ((core (emlua-bracket-new-core (emlua-bracket-hash-table string))))
     (format "[%s[%s]%s]" core string core)))
 
 ;; Based on: (find-efunction 'replace-regexp-in-string)
 ;;      See: (find-elnode "Creating Hash")
 ;;           (find-elnode "Hash Access")
-;;     Test: (lua-bracket-hash-table "[==[]===]")
+;;     Test: (emlua-bracket-hash-table "[==[]===]")
 ;;
-(defun lua-bracket-hash-table (string)
+(defun emlua-bracket-hash-table (string)
   (let* ((regexp (rx (any "[]") (one-or-more "=") (any "[]")))
          (hash-table (make-hash-table))
          (l (length string))
@@ -74,13 +75,13 @@
       hash-table)))
 
 ;; Tests:
-;; (setq ht (lua-bracket-hash-table "[==[]===]"))
-;; (setq ht (lua-bracket-hash-table "[=[ ]===]"))
+;; (setq ht (emlua-bracket-hash-table "[==[]===]"))
+;; (setq ht (emlua-bracket-hash-table "[=[ ]===]"))
 ;; (gethash 1 ht)
 ;; (gethash 2 ht)
-;; (lua-bracket-new-core ht)
+;; (emlua-bracket-new-core ht)
 ;;
-(defun lua-bracket-new-core (hash-table)
+(defun emlua-bracket-new-core (hash-table)
   (cl-loop for k from 1
            do (if (not (gethash k hash-table))
 		  (cl-return (make-string k ?=)))))
@@ -100,7 +101,7 @@
 (setq emlua-dot-so       "~/emacs-lua/emlua.so")
 (setq emlua-dot-el       "~/emacs-lua/emlua.el")
 (setq emlua-luainit-file "~/LUA/lua50init.lua")
-(setq emlua-edrxrepl-dir "~/edrxrepl/")
+(setq emlua-edrxrepl-dir "~/emacs-lua/")
 
 ;; Test: (find-estring (emlua-init-lua-0))
 ;;
@@ -203,3 +204,17 @@ This function is a prototype that only works in a controlled setting."
   (eepitch-emlua-esend1)
   (eepitch-emlua-prompt))
 
+
+
+
+
+;;;                 _                                   _       _   _     _     
+;;;   ___ _ __ ___ | |_   _  __ _        _____   ____ _| |     | |_| |__ (_)___ 
+;;;  / _ \ '_ ` _ \| | | | |/ _` |_____ / _ \ \ / / _` | |_____| __| '_ \| / __|
+;;; |  __/ | | | | | | |_| | (_| |_____|  __/\ V / (_| | |_____| |_| | | | \__ \
+;;;  \___|_| |_| |_|_|\__,_|\__,_|      \___| \_/ \__,_|_|      \__|_| |_|_|___/
+;;;                                                                             
+;; «emlua-eval-this»  (to ".emlua-eval-this")
+
+(defun emlua-eval-this ()
+  (eval (ee-read (aref (emlua-dostring "return eval_this") 0))))

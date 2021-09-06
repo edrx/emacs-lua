@@ -13,9 +13,9 @@
 # (defun cv () (interactive) (co) (vo))
 # (defun c  () (interactive) (find-angg "emacs-lua/emlua.cpp"))
 # (defun el () (interactive) (find-angg "emacs-lua/emlua.el"))
-# (defun e  () (interactive) (find-angg "emacs-lua/emlua-tests.e"))
-# (defun r  () (interactive) (find-angg "edrxrepl/edrxrepl.lua"))
-# (defun p  () (interactive) (find-angg "edrxrepl/edrxpcall.lua"))
+# (defun et () (interactive) (find-angg "emacs-lua/tests.e"))
+# (defun r  () (interactive) (find-angg "emacs-lua/edrxrepl.lua"))
+# (defun p  () (interactive) (find-angg "emacs-lua/edrxpcall.lua"))
 # 
 # (find-mygitrepo-links "emacs-lua")
 # (find-orgnode "Table of Contents")
@@ -23,7 +23,13 @@
 
 Run a Lua interpreter inside Emacs.
 
-At this moment this is just a messy, undocumented prototype.
+At this moment this is practically undocumented.
+
+All the current tests are [[http://angg.twu.net/eev-intros/find-escripts-intro.html][e-scripts]] and are in the file [[http://angg.twu.net/emacs-lua/tests.e.html][tests.e]].
+
+The files edrxpcall.lua and edrxrepl.lua were copied from [[https://github.com/edrx/emacs-lua/][here]].
+
+[[http://angg.twu.net/contact.html][Here]]'s how to get in touch with me.
 
 #+begin_comment
  (eepitch-shell)

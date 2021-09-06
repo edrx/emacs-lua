@@ -4,9 +4,9 @@
 #
 # This file is at:
 # <https://github.com/edrx/emacs-lua/>
-#     <http://angg.twu.net/emacs-lua/emlua-tests.e.html>
-#     <http://angg.twu.net/emacs-lua/emlua-tests.e>
-#              (find-angg "emacs-lua/emlua-tests.e")
+#     <http://angg.twu.net/emacs-lua/tests.e.html>
+#     <http://angg.twu.net/emacs-lua/tests.e>
+#              (find-angg "emacs-lua/tests.e")
 #
 # In the .html the sexp hyperlinks work.
 # See: http://angg.twu.net/#eev
@@ -16,8 +16,8 @@
 #######
 
 (defun e  () (interactive) (find-angg "emacs-lua/emlua.cpp"))
-(defun et () (interactive) (find-angg "emacs-lua/emlua-tests.e"))
 (defun l  () (interactive) (find-angg "emacs-lua/emlua.el"))
+(defun et () (interactive) (find-angg "emacs-lua/tests.e"))
 (defun o  () (interactive) (find-angg "emacs-lua/README.org"))
 
 
@@ -26,6 +26,7 @@
 # «.compile-so»		(to "compile-so")
 # «.emlua-dostring»	(to "emlua-dostring")
 # «.eepitch-emlua»	(to "eepitch-emlua")
+# «.eval-this»		(to "eval-this")
 
 
 
@@ -133,6 +134,32 @@ print(22,
 =
 = nil, nil, 40, nil, nil
 
+
+
+
+#####
+#
+# eval-this
+# 2021aug25
+#
+#####
+
+# «eval-this»  (to ".eval-this")
+
+ (eepitch-emlua)
+ (eepitch-kill)
+ (eepitch-emlua)
+ (eepitch-emlua-prompt)
+
+eval_this = '(find-angg "LUA/lua50init.lua" "split")'
+
+                      (emlua-dostring "return eval_this")
+                (aref (emlua-dostring "return eval_this") 0)
+       (ee-read (aref (emlua-dostring "return eval_this") 0))
+ (eval (ee-read (aref (emlua-dostring "return eval_this") 0)))
+
+ ;; (find-angg "emacs-lua/emlua.el" "emlua-eval-this")
+ (emlua-eval-this)
 
 
 
