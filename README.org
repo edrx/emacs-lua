@@ -27,7 +27,7 @@ At this moment this is practically undocumented.
 
 All the current tests are [[http://angg.twu.net/eev-intros/find-escripts-intro.html][e-scripts]] and are in the file [[http://angg.twu.net/emacs-lua/tests.e.html][tests.e]].
 
-The files edrxpcall.lua and edrxrepl.lua were copied from [[https://github.com/edrx/emacs-lua/][here]].
+The files [[http://angg.twu.net/emacs-lua/edrxpcall.lua.html][edrxpcall.lua]] and [[http://angg.twu.net/emacs-lua/edrxrepl.lua.html][edrxrepl.lua]] were copied from [[https://github.com/edrx/edrxrepl/][here]].
 
 [[http://angg.twu.net/contact.html][Here]]'s how to get in touch with me.
 
