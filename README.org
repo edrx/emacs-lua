@@ -11,11 +11,11 @@
 # (defun vo () (interactive) (brg     "~/emacs-lua/README.html"))
 # (defun co () (interactive) (eek "C-c C-e h h"))
 # (defun cv () (interactive) (co) (vo))
-# (defun c  () (interactive) (find-angg "emacs-lua/emlua.cpp"))
+# (defun ec () (interactive) (find-angg "emacs-lua/emlua.cpp"))
 # (defun el () (interactive) (find-angg "emacs-lua/emlua.el"))
 # (defun et () (interactive) (find-angg "emacs-lua/tests.e"))
-# (defun r  () (interactive) (find-angg "emacs-lua/edrxrepl.lua"))
-# (defun p  () (interactive) (find-angg "emacs-lua/edrxpcall.lua"))
+# (defun er () (interactive) (find-angg "emacs-lua/edrxrepl.lua"))
+# (defun ep () (interactive) (find-angg "emacs-lua/edrxpcall.lua"))
 # 
 # (find-mygitrepo-links "emacs-lua")
 # (find-orgnode "Table of Contents")
@@ -49,7 +49,16 @@ rm -v *.so
 #   (c)ommit -> (c)reate
 #   (P)ush -> (p)ushremote
 #   https://github.com/edrx/emacs-lua
-#
+
+cd ~/emacs-lua/
+ls -lAF
+g++ -I$HOME/bigsrc/emacs28/src \
+    -I/usr/include/lua5.3 \
+    -shared \
+    emlua.cpp \
+    -o emlua.so \
+    -llua5.3
+
 #+end_comment
 
 # Local Variables:
