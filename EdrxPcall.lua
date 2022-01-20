@@ -1,8 +1,8 @@
 -- This file:
 --   https://github.com/edrx/emacs-lua/
---       http://angg.twu.net/emacs-lua/edrxpcall.lua.html
---       http://angg.twu.net/emacs-lua/edrxpcall.lua
---        (find-angg        "emacs-lua/edrxpcall.lua")
+--       http://angg.twu.net/emacs-lua/EdrxPcall.lua.html
+--       http://angg.twu.net/emacs-lua/EdrxPcall.lua
+--        (find-angg        "emacs-lua/EdrxPcall.lua")
 -- Author: Eduardo Ochs <eduardoochs@gmail.com>
 --
 -- In the HTML version the sexp hyperlinks work.
@@ -10,14 +10,14 @@
 --      (find-eepitch-intro "3. Test blocks")
 --
 -- Author:  Eduardo Ochs <eduardoochs@gmail.com>
--- Version: 20210824
+-- Version: 20210918
 -- License: GPL3 at this moment.
 -- If you need another license, get in touch!
 --
 -- Some eev-isms:
 -- (defun o () (interactive) (find-angg "emacs-lua/README.org"))
 -- (defun r () (interactive) (find-angg "emacs-lua/edrxrepl.lua"))
--- (defun x () (interactive) (find-angg "emacs-lua/edrxpcall.lua"))
+-- (defun x () (interactive) (find-angg "emacs-lua/EdrxPcall.lua"))
 
 
 
@@ -71,7 +71,8 @@
 -- remember that "return", "return nil", are "return nil, nil" are all
 -- different, as they return lists of values of length 0, 1, and 2...
 -- The option "\n" at the end adds a "\n" at the end of the output
--- only when the "=" receives a non-empty list of values.
+-- only when the "=" receives a non-empty list of values (but this
+-- still has some bugs).
 
 
 
@@ -239,7 +240,7 @@ EdrxPcall = Class {
  (eepitch-lua51)
  (eepitch-kill)
  (eepitch-lua51)
-dofile "edrxpcall.lua"
+dofile "EdrxPcall.lua"
 
 = EdrxPcall.new():call(expr, "2,    3"):out("=", "\n")  --> "2  3\n"
 = EdrxPcall.new():call(expr, "2,    3"):out("=")        --> "2  3"

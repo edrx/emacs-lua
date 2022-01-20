@@ -249,10 +249,10 @@ ls -lAF
 #####
 
 # «emlua-dostring»  (to ".emlua-dostring")
-# (find-fline "~/emacs-lua/")
-# (find-fline "~/emacs-lua/" "emlua.so")
+# (find-fline "~/usrc/emacs-lua/")
+# (find-fline "~/usrc/emacs-lua/" "emlua.so")
 
- (load       "~/emacs-lua/emlua.so")
+ (load       "~/usrc/emacs-lua/emlua.so")
 
  (emlua-dostring "return 22")
  (emlua-dostring "return 22+33")
@@ -281,7 +281,7 @@ ls -lAF
 # (find-angg "emacs-lua/emlua.el")
 # (find-angg "emacs-lua/emlua.el" "eepitch-emlua")
 
- (load "~/emacs-lua/emlua.el")
+ (load "~/usrc/emacs-lua/emlua.el")
  (emlua-load-all)
 
  (eepitch-emlua)

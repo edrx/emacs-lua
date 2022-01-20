@@ -1,22 +1,22 @@
--- This file: edrxrepl.lua - a REPL for Lua.
+-- This file: EdrxRepl.lua - a REPL for Lua.
 --   https://github.com/edrx/emacs-lua/
---    http://angg.twu.net/emacs-lua/edrxrepl.lua.html
---    http://angg.twu.net/emacs-lua/edrxrepl.lua
---     (find-angg        "emacs-lua/edrxrepl.lua")
+--    http://angg.twu.net/emacs-lua/EdrxRepl.lua.html
+--    http://angg.twu.net/emacs-lua/EdrxRepl.lua
+--     (find-angg        "emacs-lua/EdrxRepl.lua")
 --
 -- In the HTML version the sexp hyperlinks work.
 -- See: (find-eev-quick-intro "3. Elisp hyperlinks")
 --      (find-eepitch-intro "3. Test blocks")
 --
 -- Author:  Eduardo Ochs <eduardoochs@gmail.com>
--- Version: 20210824
+-- Version: 20210918
 -- License: GPL3 at this moment.
 -- If you need another license, get in touch!
 --
 -- Some eev-isms:
 -- (defun o () (interactive) (find-angg "emacs-lua/README.org"))
--- (defun r () (interactive) (find-angg "emacs-lua/edrxrepl.lua"))
--- (defun x () (interactive) (find-angg "emacs-lua/edrxpcall.lua"))
+-- (defun r () (interactive) (find-angg "emacs-lua/EdrxRepl.lua"))
+-- (defun x () (interactive) (find-angg "emacs-lua/EdrxPcall.lua"))
 
 
 -- This file is being rewritten.
@@ -26,13 +26,14 @@
 -- The class EdrxRepl uses
 -- the class EdrxPcall,
 --  that is defined here:
-require "edrxpcall"   -- (find-angg "emacs-lua/edrxpcall.lua")
+require "EdrxPcall"   -- (find-angg "emacs-lua/EdrxPcall.lua")
 
 
 
 -- «.EdrxRepl»			(to "EdrxRepl")
 -- «.EdrxRepl-emacs»		(to "EdrxRepl-emacs")
 -- «.EdrxRepl-tests»		(to "EdrxRepl-tests")
+-- «.dbg-tests»			(to "dbg-tests")
 
 
 
@@ -113,6 +114,8 @@ EdrxRepl = Class {
 	  return "[exec error]"
         end
       end,
+    printcomperror  = function (r) print(r.err) end,
+    printexecerror = function (r) print(r.err) end,
     readevalprint = function (r)
         r:read()
         if r:trapcomperror() then return r:printcomperror() end
@@ -183,7 +186,7 @@ PP()
  (eepitch-lua51)
  (eepitch-kill)
  (eepitch-lua51)
-dofile "edrxrepl.lua"
+dofile "EdrxRepl.lua"
 REPL = EdrxRepl.new()
 -- REPL:repl()
 REPL:repl()
@@ -199,7 +202,7 @@ REPL.stop = 1
  (eepitch-lua51)
  (eepitch-kill)
  (eepitch-lua51)
-dofile "edrxrepl.lua"
+dofile "EdrxRepl.lua"
 REPL = EdrxRepl.new()
 REPL:erepltest()
 print(
@@ -227,7 +230,7 @@ REPL.stop = 1
  (eepitch-lua51)
  (eepitch-kill)
  (eepitch-lua51)
-dofile "edrxrepl.lua"
+dofile "EdrxRepl.lua"
 EdrxPcall.__index.tb_e = 10
 EdrxPcall.__index.tb_e = 5
 EdrxPcall.__index.tb_e = 6
@@ -237,3 +240,4 @@ REPL:erepltest()
 
 
 --]]
+
