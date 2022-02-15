@@ -36,7 +36,7 @@ static emacs_value lua_to_elisp(lua_State *L, emacs_env *env, int i) {
 // basically a wrapper around the Lua `dostring` function
 // returns a vector containing the multiple (possibly zero) return values (called `tostring` on them) of the Lua code
 // returns an error message on failure
-static emacs_value ef_lua_dostring(emacs_env *env, ptrdiff_t nargs, emacs_value *args, void *data) {
+static emacs_value ef_lua_dostring(emacs_env *env, ptrdiff_t nargs, emacs_value *args, void *data) noexcept {
 	// closure data is lua_State
 	lua_State *L = (lua_State *)data;
 	// the env is valid on for this callstack

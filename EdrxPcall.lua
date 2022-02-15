@@ -76,10 +76,31 @@
 
 
 
+-- «.download»		(to "download")
+--
 -- «.from-init»		(to "from-init")
 -- «.Class»		(to "Class")
 -- «.EdrxPcall»		(to "EdrxPcall")
 -- «.EdrxPcall-tests»	(to "EdrxPcall-tests")
+
+
+
+-- «download»  (to ".download")
+--[[
+-- (setq ee-git-dir "/tmp/")
+-- (find-git-links "https://github.com/edrx/emacs-lua" "emacslua")
+
+• (code-c-d "emacslua" "/tmp/emacs-lua/")
+• (eepitch-shell)
+• (eepitch-kill)
+• (eepitch-shell)
+rm -Rfv /tmp/emacs-lua/
+cd      /tmp/
+git clone https://github.com/edrx/emacs-lua
+cd      /tmp/emacs-lua/
+• (find-emacsluafile "EdrxPcall.lua" "EdrxPcall-tests")
+
+--]]
 
 
 -- «from-init»  (to ".from-init")
@@ -237,9 +258,10 @@ EdrxPcall = Class {
 
 -- «EdrxPcall-tests»  (to ".EdrxPcall-tests")
 --[[
- (eepitch-lua51)
- (eepitch-kill)
- (eepitch-lua51)
+
+• (eepitch-lua51)
+• (eepitch-kill)
+• (eepitch-lua51)
 dofile "EdrxPcall.lua"
 
 = EdrxPcall.new():call(expr, "2,    3"):out("=", "\n")  --> "2  3\n"

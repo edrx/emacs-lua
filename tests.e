@@ -48,8 +48,7 @@
 #####
 
 # «find-angg-and-find-es»  (to ".find-angg-and-find-es")
-# From: (find-angg ".emacs.templates" "find-anggwget-links")
-# (find-anggwget-links)
+# From: (find-eev "eev-tlinks.el" "find-angg-es-links")
 
 ;; Versions that only work in my machine:
 ;;
