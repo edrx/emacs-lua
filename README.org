@@ -17,13 +17,19 @@
 # (defun er () (interactive) (find-angg "emacs-lua/edrxrepl.lua"))
 # (defun ep () (interactive) (find-angg "emacs-lua/edrxpcall.lua"))
 # 
+# (require 'ox-md)
+# (org-md-export-to-markdown)
+# (org-html-export-to-html)
+
 # (find-mygitrepo-links "emacs-lua")
 # (find-orgnode "Table of Contents")
 #+OPTIONS: toc:nil num:nil
 
 Run a Lua interpreter inside Emacs.
 
-At this moment this is practically undocumented.
+/This is obsolete!/ Try [[https://github.com/edrx/emacs-lua/][emlua]] instead!
+
+# At this moment this is practically undocumented.
 
 All the current tests are [[http://angg.twu.net/eev-intros/find-escripts-intro.html][e-scripts]] and are in the file [[http://angg.twu.net/emacs-lua/tests.e.html][tests.e]].
 

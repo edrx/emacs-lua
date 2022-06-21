@@ -93,7 +93,7 @@ int emacs_module_init(struct emacs_runtime *ert) noexcept
 			1, // min_arity,
 			1, // max_arity,
 			&ef_lua_dostring,
-			"run string as Lua code",
+			"Run ARG1 - a string - as Lua code.",
 			L
 			);
 	emacs_value symbol = env->intern(env, "emlua-dostring");

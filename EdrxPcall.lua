@@ -90,7 +90,6 @@
 -- (setq ee-git-dir "/tmp/")
 -- (find-git-links "https://github.com/edrx/emacs-lua" "emacslua")
 
-• (code-c-d "emacslua" "/tmp/emacs-lua/")
 • (eepitch-shell)
 • (eepitch-kill)
 • (eepitch-shell)
@@ -98,7 +97,9 @@ rm -Rfv /tmp/emacs-lua/
 cd      /tmp/
 git clone https://github.com/edrx/emacs-lua
 cd      /tmp/emacs-lua/
-• (find-emacsluafile "EdrxPcall.lua" "EdrxPcall-tests")
+••
+• (code-c-d "emacslua" "/tmp/emacs-lua/" :anchor)
+• (find-emacslua "EdrxPcall.lua" "EdrxPcall-tests")
 
 --]]
 

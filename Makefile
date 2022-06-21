@@ -5,6 +5,6 @@ emlua.so:
 	g++ -I$(EMACS_DIR)/src -I$(LUA_INCLUDE_DIR) -shared emlua.cpp -o $@ -llua5.3
 
 clean:
-	rm emlua.so
+	rm -fv emlua.so
 
 .PHONY: clean
