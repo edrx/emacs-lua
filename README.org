@@ -27,7 +27,7 @@
 
 Run a Lua interpreter inside Emacs.
 
-/This is obsolete!/ Try [[https://github.com/edrx/emacs-lua/][emlua]] instead!
+/This is obsolete!/ Try [[https://github.com/edrx/emlua/][emlua]] instead!
 
 # At this moment this is practically undocumented.
 
